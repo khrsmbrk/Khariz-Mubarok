@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
-import { Building2, Save, Wrench, Key } from 'lucide-react';
+import { Building2, Save, Wrench, Key, Search, Send } from 'lucide-react';
+import { useSRMStore } from '../../store/srmStore';
 
 const SRMIntegrasi = () => {
   const [activeTab, setActiveTab] = useState('konfigurasi');
+  const { integrationConfig, updateIntegrationConfig } = useSRMStore();
+  const [localConfig, setLocalConfig] = useState(integrationConfig.satuSehat);
+
+  const handleConfigChange = (field: keyof typeof localConfig, value: string | boolean) => {
+    setLocalConfig(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSaveConfig = () => {
+    updateIntegrationConfig('satuSehat', localConfig);
+    alert('Konfigurasi Satu Sehat berhasil disimpan!');
+  };
 
   return (
     <div className="bg-white border border-slate-300 shadow-sm rounded-sm p-4 h-full flex flex-col">
@@ -23,13 +35,13 @@ const SRMIntegrasi = () => {
           className={`px-6 py-2 text-sm font-bold flex items-center gap-2 border-b-2 ${activeTab === 'cari' ? 'border-blue-500 text-blue-600 bg-blue-50' : 'border-transparent text-slate-600 hover:bg-slate-50'}`}
           onClick={() => setActiveTab('cari')}
         >
-          <SearchIcon className="w-4 h-4" /> Cari Pasien
+          <Search className="w-4 h-4" /> Cari Pasien
         </button>
         <button 
           className={`px-6 py-2 text-sm font-bold flex items-center gap-2 border-b-2 ${activeTab === 'kirim' ? 'border-blue-500 text-blue-600 bg-blue-50' : 'border-transparent text-slate-600 hover:bg-slate-50'}`}
           onClick={() => setActiveTab('kirim')}
         >
-          <SendIcon className="w-4 h-4" /> Kirim Data
+          <Send className="w-4 h-4" /> Kirim Data
         </button>
       </div>
 
@@ -46,36 +58,79 @@ const SRMIntegrasi = () => {
               
               <label className="text-sm text-slate-700">Environment:</label>
               <div className="flex items-center gap-2">
-                <input type="checkbox" id="env" className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500" />
+                <input 
+                  type="checkbox" 
+                  id="env" 
+                  className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500"
+                  checked={localConfig.isProduction}
+                  onChange={(e) => handleConfigChange('isProduction', e.target.checked)}
+                />
                 <label htmlFor="env" className="text-sm text-slate-600">Mode Production (centang jika sudah live)</label>
               </div>
 
               <label className="text-sm text-slate-700">Base URL:</label>
-              <input type="text" defaultValue="https://api-satusehat-stg.dto.kemkes.go.id" className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500" />
+              <input 
+                type="text" 
+                className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500"
+                value={localConfig.baseUrl}
+                onChange={(e) => handleConfigChange('baseUrl', e.target.value)}
+              />
 
               <label className="text-sm text-slate-700">Auth URL:</label>
-              <input type="text" defaultValue="https://api-satusehat-stg.dto.kemkes.go.id/oauth2/v1/accesstoken" className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500" />
+              <input 
+                type="text" 
+                className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500"
+                value={localConfig.authUrl}
+                onChange={(e) => handleConfigChange('authUrl', e.target.value)}
+              />
 
               <label className="text-sm text-slate-700">Organization ID:</label>
-              <input type="text" placeholder="Organization ID dari Satu Sehat" className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500" />
+              <input 
+                type="text" 
+                placeholder="Organization ID dari Satu Sehat" 
+                className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500"
+                value={localConfig.organizationId}
+                onChange={(e) => handleConfigChange('organizationId', e.target.value)}
+              />
 
               <label className="text-sm text-slate-700">Client ID:</label>
-              <input type="text" placeholder="Client ID dari Satu Sehat" className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500" />
+              <input 
+                type="text" 
+                placeholder="Client ID dari Satu Sehat" 
+                className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500"
+                value={localConfig.clientId}
+                onChange={(e) => handleConfigChange('clientId', e.target.value)}
+              />
 
               <label className="text-sm text-slate-700">Client Secret:</label>
-              <input type="password" placeholder="Client Secret dari Satu Sehat" className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500" />
+              <input 
+                type="password" 
+                placeholder="Client Secret dari Satu Sehat" 
+                className="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500"
+                value={localConfig.clientSecret}
+                onChange={(e) => handleConfigChange('clientSecret', e.target.value)}
+              />
 
             </div>
           </div>
 
           <div className="flex gap-4 mb-8">
-            <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded text-sm font-bold flex items-center gap-2 shadow-sm">
+            <button 
+              className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded text-sm font-bold flex items-center gap-2 shadow-sm"
+              onClick={handleSaveConfig}
+            >
               <Save className="w-4 h-4" /> Simpan Konfigurasi
             </button>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded text-sm font-bold flex items-center gap-2 shadow-sm">
+            <button 
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded text-sm font-bold flex items-center gap-2 shadow-sm"
+              onClick={() => alert('Fitur Test Koneksi masih dalam pengembangan')}
+            >
               <Wrench className="w-4 h-4" /> Test Koneksi
             </button>
-            <button className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded text-sm font-bold flex items-center gap-2 shadow-sm">
+            <button 
+              className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded text-sm font-bold flex items-center gap-2 shadow-sm"
+              onClick={() => alert('Fitur Get Token masih dalam pengembangan')}
+            >
               <Key className="w-4 h-4" /> Get Token
             </button>
           </div>

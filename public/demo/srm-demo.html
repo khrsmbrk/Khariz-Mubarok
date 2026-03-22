@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM RSUMLA - Demo Mode</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #047857;
+            --sidebar: #1e293b;
+            --bg: #f1f5f9;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background: var(--bg); display: flex; height: 100vh; }
+        
+        /* Sidebar */
+        .sidebar { width: 250px; background: var(--sidebar); color: white; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 20px; background: #0f172a; font-weight: bold; font-size: 1.2rem; }
+        .nav-item { padding: 15px 20px; cursor: pointer; transition: background 0.2s; }
+        .nav-item:hover, .nav-item.active { background: var(--primary); }
+        
+        /* Main Content */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .topbar { background: white; padding: 15px 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; }
+        .content-area { padding: 20px; overflow-y: auto; flex: 1; }
+        
+        /* Cards & Grids */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .card h3 { color: #64748b; font-size: 0.9rem; margin-bottom: 10px; }
+        .card .value { font-size: 1.8rem; font-weight: bold; color: var(--sidebar); }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f8fafc; }
+        
+        /* Forms & Buttons */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; }
+        .btn { padding: 10px 15px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn:hover { background: #065f46; }
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .flex-gap { display: flex; gap: 10px; }
+    </style>
+</head>
+<body>
+    <div id="app" style="display: contents;">
+        <div class="sidebar">
+            <div class="sidebar-header">SIM RSUMLA</div>
+            <div class="nav-item" :class="{active: currentMenu === 'dashboard'}" @click="currentMenu = 'dashboard'">Dashboard</div>
+            <div class="nav-item" :class="{active: currentMenu === 'antrian'}" @click="currentMenu = 'antrian'">Antrian</div>
+            <div class="nav-item" :class="{active: currentMenu === 'rme'}" @click="currentMenu = 'rme'">Rekam Medis (RME)</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="topbar">
+                <h2>{{ menuTitle }}</h2>
+                <div>Admin User</div>
+            </div>
+            
+            <div class="content-area">
+                <!-- Dashboard -->
+                <div v-show="currentMenu === 'dashboard'">
+                    <div class="grid-3">
+                        <div class="card"><h3>Total Pasien Hari Ini</h3><div class="value">145</div></div>
+                        <div class="card"><h3>Antrian Menunggu</h3><div class="value">23</div></div>
+                        <div class="card"><h3>Kamar Tersedia</h3><div class="value">42</div></div>
+                    </div>
+                    <div class="card">
+                        <h3>Kunjungan 7 Hari Terakhir</h3>
+                        <canvas id="visitChart" height="100"></canvas>
+                    </div>
+                </div>
+
+                <!-- Antrian -->
+                <div v-show="currentMenu === 'antrian'">
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3>Daftar Antrian Poliklinik</h3>
+                            <div class="flex-gap">
+                                <button class="btn" @click="panggilBerikutnya">Panggil Berikutnya</button>
+                                <button class="btn btn-outline" @click="resetAntrian">Reset</button>
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr><th>No. Antrian</th><th>Nama Pasien</th><th>Status</th><th>Aksi</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in antrian" :key="item.id">
+                                    <td><strong>{{ item.nomor }}</strong></td>
+                                    <td>{{ item.nama }}</td>
+                                    <td>{{ item.status }}</td>
+                                    <td>
+                                        <button v-if="item.status === 'Menunggu'" class="btn" style="padding: 5px 10px; font-size: 0.8rem;" @click="panggil(item)">Panggil</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RME -->
+                <div v-show="currentMenu === 'rme'">
+                    <div class="card" style="margin-bottom: 20px;">
+                        <div class="form-group">
+                            <label>Pilih Pasien</label>
+                            <select v-model="selectedPatient">
+                                <option value="">-- Pilih Pasien --</option>
+                                <option v-for="p in patients" :value="p.id">{{ p.nama }} (RM: {{ p.rm }})</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card" v-if="selectedPatient">
+                        <h3>Form Rekam Medis Elektronik</h3>
+                        <br>
+                        <div class="form-group">
+                            <label>Anamnesa (S)</label>
+                            <textarea rows="3" v-model="form.anamnesa"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Pemeriksaan Fisik (O)</label>
+                            <textarea rows="3" v-model="form.fisik"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Diagnosis (A)</label>
+                            <input type="text" v-model="form.diagnosis">
+                        </div>
+                        <div class="form-group">
+                            <label>Terapi / Tindakan (P)</label>
+                            <textarea rows="3" v-model="form.terapi"></textarea>
+                        </div>
+                        <button class="btn" @click="simpanRME">Simpan Rekam Medis</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref, computed, onMounted, watch } = Vue;
+
+        createApp({
+            setup() {
+                const currentMenu = ref('dashboard');
+                const menuTitle = computed(() => {
+                    const titles = { dashboard: 'Dashboard Utama', antrian: 'Manajemen Antrian', rme: 'Rekam Medis Elektronik' };
+                    return titles[currentMenu.value];
+                });
+
+                // Antrian State
+                const antrian = ref([
+                    { id: 1, nomor: 'A001', nama: 'Budi Santoso', status: 'Selesai' },
+                    { id: 2, nomor: 'A002', nama: 'Siti Aminah', status: 'Sedang Diperiksa' },
+                    { id: 3, nomor: 'A003', nama: 'Ahmad Dahlan', status: 'Menunggu' },
+                    { id: 4, nomor: 'A004', nama: 'Nyi Ageng Serang', status: 'Menunggu' },
+                ]);
+
+                const panggilBerikutnya = () => {
+                    const next = antrian.value.find(a => a.status === 'Menunggu');
+                    if (next) {
+                        const current = antrian.value.find(a => a.status === 'Sedang Diperiksa');
+                        if (current) current.status = 'Selesai';
+                        next.status = 'Sedang Diperiksa';
+                    } else {
+                        alert('Tidak ada antrian menunggu.');
+                    }
+                };
+
+                const panggil = (item) => {
+                    const current = antrian.value.find(a => a.status === 'Sedang Diperiksa');
+                    if (current) current.status = 'Selesai';
+                    item.status = 'Sedang Diperiksa';
+                };
+
+                const resetAntrian = () => {
+                    antrian.value.forEach(a => a.status = 'Menunggu');
+                };
+
+                // RME State
+                const patients = ref([
+                    { id: 1, nama: 'Budi Santoso', rm: 'RM001' },
+                    { id: 2, nama: 'Siti Aminah', rm: 'RM002' }
+                ]);
+                const selectedPatient = ref('');
+                const form = ref({ anamnesa: '', fisik: '', diagnosis: '', terapi: '' });
+
+                const simpanRME = () => {
+                    console.log('Menyimpan RME:', form.value);
+                    alert('Data Rekam Medis berhasil disimpan!');
+                    form.value = { anamnesa: '', fisik: '', diagnosis: '', terapi: '' };
+                    selectedPatient.value = '';
+                };
+
+                // Chart
+                let chartInstance = null;
+                const initChart = () => {
+                    const ctx = document.getElementById('visitChart');
+                    if (!ctx) return;
+                    if (chartInstance) chartInstance.destroy();
+                    chartInstance = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+                            datasets: [{
+                                label: 'Jumlah Kunjungan',
+                                data: [120, 150, 180, 140, 160, 90, 60],
+                                backgroundColor: '#047857'
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false }
+                    });
+                };
+
+                watch(currentMenu, (newVal) => {
+                    if (newVal === 'dashboard') {
+                        setTimeout(initChart, 100);
+                    }
+                });
+
+                onMounted(() => {
+                    initChart();
+                });
+
+                return {
+                    currentMenu, menuTitle,
+                    antrian, panggilBerikutnya, panggil, resetAntrian,
+                    patients, selectedPatient, form, simpanRME
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

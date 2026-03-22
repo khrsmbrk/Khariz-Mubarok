@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Activity className="w-8 h-8 text-blue-600 mr-2" />
-            <span className="font-bold text-xl text-slate-900">RSUMLA <span className="text-blue-600">•</span> Rekam Medis Modern</span>
+            <span className="font-bold text-xl text-slate-900">RS UMLA <span className="text-blue-600">•</span> Rekam Medis Modern</span>
           </div>
           <div className="hidden lg:flex space-x-8">
             <a href="#fitur" className="text-sm font-medium text-slate-600 hover:text-blue-600">Fitur</a>
@@ -26,7 +26,7 @@ const Navbar = () => {
              <Link to="/portal/pendaftaran" className="hidden md:block text-xs font-semibold text-slate-600 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-50">Portal Pasien</Link>
              <Link to="/karyawan/login" className="hidden md:block text-xs font-semibold text-slate-600 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-50">Portal Karyawan</Link>
              <Link to="/smart-office" className="hidden md:block text-xs font-semibold text-slate-600 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-50">SMART Office</Link>
-             <Link to="/srm/dashboard" className="text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors shadow-sm">SIM RSUMLA</Link>
+             <Link to="/srm/dashboard" className="text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors shadow-sm">SIM RS UMLA</Link>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ const Hero = () => {
       
       <div className="flex flex-wrap justify-center gap-4 mb-16">
         <Link to="/srm/dashboard" className="px-8 py-3.5 text-base font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-full shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">
-          SIM RSUMLA
+          SIM RS UMLA
         </Link>
         <Link to="/smart-office" className="px-8 py-3.5 text-base font-bold text-slate-700 bg-white border border-slate-200 hover:border-blue-200 hover:bg-blue-50 rounded-full shadow-sm transition-all">
           SMART Office

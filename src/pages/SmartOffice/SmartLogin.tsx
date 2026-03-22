@@ -11,14 +11,17 @@ export default function SmartLogin() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // Simulate login
-    if (nip === 'admin' && password === 'admin') {
-      localStorage.setItem('smart_session', JSON.stringify({ role: 'management', name: 'Admin RSML' }));
+    if (nip === 'rsumla' && password === 'rsumla123') {
+      localStorage.setItem('smart_session', JSON.stringify({ role: 'management', name: 'Admin RS UMLA' }));
+      navigate('/smart-office/dashboard');
+    } else if (nip === 'admin' && password === 'admin') {
+      localStorage.setItem('smart_session', JSON.stringify({ role: 'management', name: 'Admin RS UMLA' }));
       navigate('/smart-office/dashboard');
     } else if (nip === 'staff' && password === 'staff') {
-      localStorage.setItem('smart_session', JSON.stringify({ role: 'staff', name: 'Staff RSML' }));
+      localStorage.setItem('smart_session', JSON.stringify({ role: 'staff', name: 'Staff RS UMLA' }));
       navigate('/smart-office/dashboard');
     } else {
-      setError('NIP/Email atau Password salah. (Gunakan admin/admin atau staff/staff)');
+      setError('Username atau Password salah. (Gunakan rsumla/rsumla123)');
     }
   };
 
@@ -27,20 +30,20 @@ export default function SmartLogin() {
       <div className="max-w-md w-full bg-slate-800 rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
         <div className="p-8 text-center border-b border-slate-700">
           <Briefcase className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-white tracking-wide">SMART Office</h2>
-          <p className="text-slate-400 text-sm mt-2">Enterprise Resource Planning RSML</p>
+          <h2 className="text-2xl font-bold text-white tracking-wide">RS UMLA Office</h2>
+          <p className="text-slate-400 text-sm mt-2">Enterprise Resource Planning RS UMLA</p>
         </div>
         <div className="p-8">
           {error && <div className="bg-red-900/50 border border-red-500 text-red-200 p-3 rounded-lg mb-6 text-sm">{error}</div>}
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">NIP / Email Korporat</label>
+              <label className="block text-sm font-medium text-slate-300 mb-1">Username / NIP</label>
               <input 
                 type="text" 
                 value={nip}
                 onChange={(e) => setNip(e.target.value)}
                 className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 outline-none placeholder-slate-500" 
-                placeholder="Masukkan NIP atau Email" 
+                placeholder="Masukkan Username atau NIP" 
                 required 
               />
             </div>

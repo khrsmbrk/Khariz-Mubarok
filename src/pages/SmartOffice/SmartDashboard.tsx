@@ -12,6 +12,8 @@ import EmployeeQrGenerator from '../../components/EmployeeQrGenerator';
 import EmployeeTable from '../../components/EmployeeTable';
 import StatsCards from '../../components/StatsCards';
 import TrainingModule from '../../components/TrainingModule';
+import SiteSettingsModule from '../../components/SiteSettingsModule';
+import { Settings } from 'lucide-react';
 
 export default function SmartDashboard() {
   const navigate = useNavigate();
@@ -48,6 +50,7 @@ export default function SmartDashboard() {
     { id: 'training', label: 'Pelatihan (SIMPEL)', icon: <CheckCircle className="w-5 h-5 mr-3" /> },
     { id: 'finance', label: 'Keuangan', icon: <DollarSign className="w-5 h-5 mr-3" /> },
     { id: 'inventory', label: 'Inventaris & Farmasi', icon: <Package className="w-5 h-5 mr-3" /> },
+    ...(session.role === 'management' ? [{ id: 'settings', label: 'Pengaturan Website', icon: <Settings className="w-5 h-5 mr-3" /> }] : []),
   ];
 
   return (
@@ -304,6 +307,9 @@ export default function SmartDashboard() {
                 Modul {navItems.find(i => i.id === activeTab)?.label} saat ini sedang dalam tahap pengembangan dan akan segera tersedia pada pembaruan sistem berikutnya.
               </p>
             </div>
+          )}
+          {activeTab === 'settings' && session.role === 'management' && (
+            <SiteSettingsModule />
           )}
         </main>
       </div>

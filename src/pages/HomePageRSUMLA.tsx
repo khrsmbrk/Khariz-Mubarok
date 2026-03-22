@@ -1,127 +1,88 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Search, Globe, Menu, X, ChevronRight, PlayCircle, 
-  Calendar, MapPin, Phone, Mail, ArrowRight
+  Search, Globe, Menu, X, ChevronRight, ChevronDown, PlayCircle, 
+  Calendar, MapPin, Phone, Mail, ArrowRight, ArrowUpRight,
+  Activity, Users, BedDouble, Award, ShieldCheck, HeartPulse, Sparkles
 } from 'lucide-react';
 import { 
   quickAccess, layananUnggulan, beritaRSUMLA, 
   seputarUMLA, agendaDiklit, inovasiLayanan, mediaEdukasi 
 } from '../data/rsumlaData';
+import { t, Lang } from '../utils/translations';
+import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
+import { useLangStore } from '../store/langStore';
+import { useSiteStore } from '../store/siteStore';
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [lang, setLang] = useState('ID');
-
-  const menus = [
-    'Beranda', 'Profil', 'Pelayanan', 'Diklat & Penelitian', 
-    'Promosi Kesehatan', 'Laporan', 'Reformasi Birokrasi', 'PPID', 'Pengaduan'
-  ];
-
+const Hero = ({ lang }: { lang: Lang }) => {
+  const { settings } = useSiteStore();
+  
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      {/* Top Bar */}
-      <div className="bg-emerald-700 text-white text-xs py-1.5 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <span className="hidden sm:inline">Rumah Sakit Pendidikan Universitas Muhammadiyah Lamongan</span>
-          <span className="sm:hidden">RSUMLA</span>
-        </div>
-        <div className="flex items-center space-x-4">
-          <button className="hover:text-emerald-200 transition-colors">Portal Pasien</button>
-          <button className="hover:text-emerald-200 transition-colors">SIM RSUMLA</button>
-          <div className="flex items-center border-l border-emerald-600 pl-4 ml-2">
-            <button 
-              onClick={() => setLang('ID')} 
-              className={`px-1.5 ${lang === 'ID' ? 'font-bold' : 'text-emerald-300'}`}
-            >ID</button>
-            <span>|</span>
-            <button 
-              onClick={() => setLang('EN')} 
-              className={`px-1.5 ${lang === 'EN' ? 'font-bold' : 'text-emerald-300'}`}
-            >EN</button>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <div className="flex items-center">
-            <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
-              <span className="text-emerald-700 font-bold text-xl">RS</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-xl text-slate-800 leading-tight">RSUMLA</span>
-              <span className="text-xs text-slate-500 font-medium">Universitas Muhammadiyah Lamongan</span>
-            </div>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {menus.map((menu, idx) => (
-              <a key={idx} href="#" className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-colors">
-                {menu}
-              </a>
-            ))}
-            <button className="ml-2 p-2 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-full transition-colors">
-              <Search className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-slate-600">
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="lg:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-4 space-y-1 shadow-lg absolute w-full">
-          {menus.map((menu, idx) => (
-            <a key={idx} href="#" className="block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-md">
-              {menu}
-            </a>
-          ))}
-        </div>
-      )}
-    </nav>
-  );
-};
-
-const Hero = () => {
-  return (
-    <div className="relative bg-slate-900 overflow-hidden">
+    <div className="relative bg-slate-900 overflow-hidden min-h-[90vh] flex items-center">
       <div className="absolute inset-0">
         <img 
-          src="https://picsum.photos/seed/hospital/1920/1080" 
-          alt="RSUMLA Building" 
-          className="w-full h-full object-cover opacity-40"
+          src={settings.heroImage} 
+          alt="RS UMLA Building" 
+          className="w-full h-full object-cover opacity-30"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/90 to-slate-900/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-slate-900/80 to-slate-900/40"></div>
       </div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-        <div className="max-w-3xl">
-          <span className="inline-block py-1 px-3 rounded-full bg-emerald-500/20 text-emerald-300 text-sm font-semibold tracking-wider mb-4 border border-emerald-500/30">
-            TEACHING HOSPITAL RSUMLA
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6 leading-tight">
-            Melayani dengan Ilmu,<br/>Menyembuhkan dengan Hati.
-          </h1>
-          <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed">
-            Rumah Sakit Pendidikan Universitas Muhammadiyah Lamongan hadir memberikan layanan kesehatan paripurna, terintegrasi dengan pendidikan dan penelitian medis terkini.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link to="/portal/pendaftaran" className="px-8 py-3.5 text-base font-bold text-emerald-900 bg-emerald-400 hover:bg-emerald-300 rounded-full shadow-lg transition-all">
-              Pendaftaran Online
-            </Link>
-            <Link to="/srm/dashboard" className="px-8 py-3.5 text-base font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md rounded-full shadow-lg transition-all">
-              SIM RSUMLA
-            </Link>
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
+              <Sparkles className="w-4 h-4 mr-2" />
+              {t(lang, 'Layanan Kesehatan Terpadu & Modern', 'Integrated & Modern Healthcare')}
+            </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-[1.1] whitespace-pre-line">
+              {lang === 'ID' ? settings.heroTitleId : settings.heroTitleEn}
+            </h1>
+            <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed font-light">
+              {lang === 'ID' ? settings.heroSubtitleId : settings.heroSubtitleEn}
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link to="/portal/pendaftaran" className="group px-8 py-4 text-base font-bold text-emerald-950 bg-emerald-400 hover:bg-emerald-300 rounded-full shadow-[0_0_40px_rgba(52,211,153,0.3)] transition-all flex items-center">
+                {t(lang, 'Pendaftaran Online', 'Online Registration')}
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link to="/srm/dashboard" className="px-8 py-4 text-base font-bold text-white bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-md rounded-full transition-all">
+                SIM RS UMLA
+              </Link>
+            </div>
+          </div>
+          
+          {/* Decorative Elements for Hero Right Side */}
+          <div className="hidden lg:block relative">
+            <div className="absolute -inset-4 bg-emerald-500/20 blur-3xl rounded-full"></div>
+            <div className="relative grid grid-cols-2 gap-4">
+              <div className="space-y-4 translate-y-8">
+                <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
+                  <HeartPulse className="w-10 h-10 text-emerald-400 mb-4" />
+                  <h3 className="text-white font-bold text-xl mb-1">24/7</h3>
+                  <p className="text-slate-400 text-sm">{t(lang, 'Layanan Gawat Darurat', 'Emergency Services')}</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
+                  <ShieldCheck className="w-10 h-10 text-blue-400 mb-4" />
+                  <h3 className="text-white font-bold text-xl mb-1">{t(lang, 'Terakreditasi', 'Accredited')}</h3>
+                  <p className="text-slate-400 text-sm">{t(lang, 'Paripurna KARS', 'Plenary KARS')}</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
+                  <Users className="w-10 h-10 text-purple-400 mb-4" />
+                  <h3 className="text-white font-bold text-xl mb-1">50+</h3>
+                  <p className="text-slate-400 text-sm">{t(lang, 'Dokter Spesialis', 'Specialist Doctors')}</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
+                  <BedDouble className="w-10 h-10 text-amber-400 mb-4" />
+                  <h3 className="text-white font-bold text-xl mb-1">200+</h3>
+                  <p className="text-slate-400 text-sm">{t(lang, 'Kapasitas Tempat Tidur', 'Bed Capacity')}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -129,48 +90,25 @@ const Hero = () => {
   );
 };
 
-const AksesCepat = () => {
-  return (
-    <section className="py-16 bg-slate-50 relative -mt-10 z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-6 md:p-8 border border-slate-100">
-          <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center">
-            <span className="w-1.5 h-6 bg-emerald-500 rounded-full mr-3"></span>
-            Akses Cepat Layanan
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {quickAccess.map((item) => (
-              <Link key={item.id} to={item.link} className="group flex flex-col items-center text-center p-4 rounded-xl hover:bg-emerald-50 border border-transparent hover:border-emerald-100 transition-all">
-                <div className="w-12 h-12 bg-slate-100 group-hover:bg-emerald-100 text-slate-600 group-hover:text-emerald-600 rounded-full flex items-center justify-center mb-3 transition-colors">
-                  <item.icon className="w-6 h-6" />
-                </div>
-                <h3 className="text-sm font-bold text-slate-800 mb-1 group-hover:text-emerald-700">{item.title}</h3>
-                <p className="text-xs text-slate-500">{item.desc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+const Statistik = ({ lang }: { lang: Lang }) => {
+  const stats = [
+    { label: t(lang, 'Tahun Pengalaman', 'Years Experience'), value: '15+', icon: Award },
+    { label: t(lang, 'Dokter Spesialis', 'Specialist Doctors'), value: '50+', icon: Users },
+    { label: t(lang, 'Tempat Tidur', 'Beds Capacity'), value: '200+', icon: BedDouble },
+    { label: t(lang, 'Pasien Terlayani', 'Patients Served'), value: '100k+', icon: Activity },
+  ];
 
-const LayananUnggulan = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-12 bg-white border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">Layanan Unggulan RSUMLA</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">Pusat pelayanan medis terpadu yang didukung oleh tenaga ahli dan teknologi terkini untuk memberikan perawatan terbaik.</p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {layananUnggulan.map((item) => (
-            <div key={item.id} className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-shadow group">
-              <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <item.icon className="w-7 h-7" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-slate-100">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="text-center px-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 mb-4">
+                <stat.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">{item.title}</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+              <h3 className="text-4xl font-light text-slate-900 mb-2 tracking-tight">{stat.value}</h3>
+              <p className="text-sm font-medium text-slate-500 uppercase tracking-wider">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -179,72 +117,152 @@ const LayananUnggulan = () => {
   );
 };
 
-const BeritaDanSeputar = () => {
+const AksesCepat = ({ lang }: { lang: Lang }) => {
   return (
-    <section className="py-16 bg-slate-50 border-y border-slate-200">
+    <section className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-3 gap-12">
-          
-          {/* Berita RSUMLA */}
-          <div className="lg:col-span-2">
-            <div className="flex justify-between items-end mb-8 border-b border-slate-200 pb-4">
-              <h2 className="text-2xl font-bold text-slate-900 flex items-center">
-                <span className="w-1.5 h-6 bg-blue-600 rounded-full mr-3"></span>
-                Berita RSUMLA
-              </h2>
-              <a href="#" className="text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center">
-                Lihat semua <ArrowRight className="w-4 h-4 ml-1" />
-              </a>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
+              {t(lang, 'Akses Cepat Layanan', 'Quick Access Services')}
+            </h2>
+            <p className="text-slate-600 text-lg">
+              {t(lang, 'Temukan layanan yang Anda butuhkan dengan cepat dan mudah melalui portal digital kami.', 'Find the services you need quickly and easily through our digital portal.')}
+            </p>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          {quickAccess(lang).map((item) => (
+            <Link key={item.id} to={item.link} className="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-xl hover:border-emerald-200 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+              <div className="w-14 h-14 bg-slate-50 group-hover:bg-emerald-50 text-slate-600 group-hover:text-emerald-600 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                <item.icon className="w-7 h-7" />
+              </div>
+              <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">{item.title}</h3>
+              <p className="text-sm text-slate-500 mt-auto">{item.desc}</p>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const LayananUnggulan = ({ lang }: { lang: Lang }) => {
+  return (
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-emerald-600 font-semibold tracking-wider uppercase text-sm mb-3 block">Center of Excellence</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
+            {t(lang, 'Layanan Unggulan RS UMLA', 'RS UMLA Center of Excellence')}
+          </h2>
+          <p className="text-lg text-slate-600">
+            {t(lang, 'Pusat pelayanan medis terpadu yang didukung oleh tenaga ahli dan teknologi terkini untuk memberikan perawatan terbaik bagi Anda dan keluarga.', 'Integrated medical service center supported by experts and the latest technology to provide the best care for you and your family.')}
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {layananUnggulan(lang).map((item, idx) => (
+            <div key={item.id} className={`group relative overflow-hidden rounded-3xl bg-slate-50 border border-slate-100 p-8 hover:bg-emerald-900 transition-colors duration-500 ${idx === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}>
+              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                <item.icon className="w-32 h-32 text-emerald-500 group-hover:text-white" />
+              </div>
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="w-16 h-16 bg-white group-hover:bg-emerald-800 text-emerald-600 group-hover:text-emerald-300 rounded-2xl flex items-center justify-center mb-8 shadow-sm transition-colors">
+                  <item.icon className="w-8 h-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 group-hover:text-white mb-4 transition-colors">{item.title}</h3>
+                <p className="text-slate-600 group-hover:text-emerald-100/80 text-base leading-relaxed mb-8 transition-colors">{item.desc}</p>
+                <div className="mt-auto">
+                  <button className="inline-flex items-center text-sm font-bold text-emerald-600 group-hover:text-emerald-300 transition-colors">
+                    {t(lang, 'Pelajari Lebih Lanjut', 'Learn More')} <ArrowUpRight className="w-4 h-4 ml-1" />
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="grid sm:grid-cols-2 gap-6">
-              {beritaRSUMLA.map((berita) => (
-                <div key={berita.id} className="bg-white rounded-xl overflow-hidden border border-slate-200 hover:shadow-lg transition-shadow group">
-                  <div className="aspect-video overflow-hidden relative">
-                    <img src={berita.image} alt={berita.judul} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
-                    <div className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded">
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const BeritaDanSeputar = ({ lang }: { lang: Lang }) => {
+  return (
+    <section className="py-24 bg-slate-50 border-t border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-12 gap-12">
+          
+          {/* Berita Utama (Kiri) */}
+          <div className="lg:col-span-8">
+            <div className="flex justify-between items-end mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                {t(lang, 'Berita & Artikel', 'News & Articles')}
+              </h2>
+              <button className="hidden md:flex items-center text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
+                {t(lang, 'Lihat Semua Berita', 'View All News')} <ArrowRight className="w-4 h-4 ml-2" />
+              </button>
+            </div>
+            
+            <div className="grid sm:grid-cols-2 gap-8">
+              {beritaRSUMLA(lang).slice(0, 2).map((berita, idx) => (
+                <div key={berita.id} className={`group flex flex-col ${idx === 0 ? 'sm:col-span-2 sm:flex-row gap-8' : ''}`}>
+                  <div className={`relative overflow-hidden rounded-2xl ${idx === 0 ? 'sm:w-1/2' : 'w-full aspect-[4/3] mb-6'}`}>
+                    <img 
+                      src={berita.image} 
+                      alt={berita.judul} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                      referrerPolicy="no-referrer" 
+                    />
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
                       {berita.kategori}
                     </div>
                   </div>
-                  <div className="p-5">
-                    <div className="flex items-center text-xs text-slate-500 mb-3">
-                      <Calendar className="w-3.5 h-3.5 mr-1.5" /> {berita.tanggal}
+                  <div className={`flex flex-col justify-center ${idx === 0 ? 'sm:w-1/2' : ''}`}>
+                    <div className="flex items-center text-sm text-slate-500 mb-3 font-medium">
+                      <Calendar className="w-4 h-4 mr-2 text-emerald-500" /> {berita.tanggal}
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-blue-600 transition-colors">
-                      <a href="#">{berita.judul}</a>
+                    <h3 className={`font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors leading-snug ${idx === 0 ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
+                      <button className="text-left">{berita.judul}</button>
                     </h3>
-                    <p className="text-sm text-slate-600 line-clamp-2">{berita.ringkasan}</p>
+                    <p className="text-slate-600 line-clamp-3 leading-relaxed mb-6">{berita.ringkasan}</p>
+                    <div className="mt-auto">
+                      <button className="inline-flex items-center text-sm font-bold text-emerald-600 group-hover:text-emerald-700 transition-colors">
+                        {t(lang, 'Baca Selengkapnya', 'Read More')} <ArrowRight className="w-4 h-4 ml-1" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Seputar UMLA */}
-          <div>
-            <div className="flex justify-between items-end mb-8 border-b border-slate-200 pb-4">
-              <h2 className="text-2xl font-bold text-slate-900 flex items-center">
-                <span className="w-1.5 h-6 bg-emerald-500 rounded-full mr-3"></span>
-                Seputar UMLA
+          {/* Seputar UMLA (Kanan) */}
+          <div className="lg:col-span-4">
+            <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm h-full">
+              <h2 className="text-2xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-100">
+                {t(lang, 'Seputar UMLA', 'About UMLA')}
               </h2>
-            </div>
-            <div className="space-y-6">
-              {seputarUMLA.map((item) => (
-                <div key={item.id} className="group">
-                  <div className="flex items-center text-xs text-emerald-600 font-bold mb-1">
-                    <span>{item.kategori}</span>
-                    <span className="mx-2 text-slate-300">•</span>
-                    <span className="text-slate-500 font-normal">{item.tanggal}</span>
+              <div className="space-y-8">
+                {seputarUMLA(lang).map((item) => (
+                  <div key={item.id} className="group cursor-pointer">
+                    <div className="flex items-center text-xs font-bold mb-2">
+                      <span className="text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md">{item.kategori}</span>
+                      <span className="mx-3 text-slate-300">•</span>
+                      <span className="text-slate-500">{item.tanggal}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-emerald-600 transition-colors leading-snug">
+                      {item.judul}
+                    </h3>
+                    <p className="text-sm text-slate-600 line-clamp-2">{item.ringkasan}</p>
                   </div>
-                  <h3 className="text-base font-bold text-slate-800 mb-1.5 group-hover:text-emerald-600 transition-colors">
-                    <a href="#">{item.judul}</a>
-                  </h3>
-                  <p className="text-sm text-slate-600 line-clamp-2">{item.ringkasan}</p>
-                </div>
-              ))}
+                ))}
+              </div>
+              <button className="w-full mt-8 py-3 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold rounded-xl transition-colors flex items-center justify-center">
+                {t(lang, 'Lihat Semua Kegiatan', 'View All Activities')}
+              </button>
             </div>
-            <a href="#" className="inline-block mt-6 text-sm font-bold text-emerald-600 hover:text-emerald-700">
-              Lihat kegiatan pendidikan &rarr;
-            </a>
           </div>
 
         </div>
@@ -253,178 +271,104 @@ const BeritaDanSeputar = () => {
   );
 };
 
-const DiklitDanInovasi = () => {
+const DiklitDanInovasi = ({ lang }: { lang: Lang }) => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-24 bg-slate-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-16">
           
           {/* Diklit & Agenda */}
           <div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-              <span className="w-1.5 h-6 bg-purple-500 rounded-full mr-3"></span>
-              Diklit & Agenda Pelatihan
-            </h2>
-            <div className="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden">
-              <ul className="divide-y divide-slate-200">
-                {agendaDiklit.map((agenda) => (
-                  <li key={agenda.id} className="p-4 hover:bg-white transition-colors flex items-start">
-                    <div className="flex-shrink-0 w-16 h-16 bg-white border border-slate-200 rounded-xl flex flex-col items-center justify-center mr-4">
-                      <span className="text-xs text-slate-500 font-medium uppercase">{agenda.tanggal.split(' ')[1]}</span>
-                      <span className="text-lg font-bold text-slate-800">{agenda.tanggal.split(' ')[0]}</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center mb-1">
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${agenda.status === 'Selesai' ? 'bg-slate-200 text-slate-600' : 'bg-purple-100 text-purple-700'}`}>
-                          {agenda.status}
-                        </span>
-                      </div>
-                      <h4 className="text-sm font-bold text-slate-800 leading-snug">{agenda.judul}</h4>
-                      <p className="text-xs text-slate-500 mt-1">{agenda.tanggal}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+            <div className="mb-10">
+              <span className="text-emerald-400 font-semibold tracking-wider uppercase text-sm mb-2 block">Pendidikan & Penelitian</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                {t(lang, 'Agenda Diklit', 'Education & Research Agenda')}
+              </h2>
             </div>
-            <a href="#" className="inline-block mt-4 text-sm font-bold text-purple-600 hover:text-purple-700">
-              Lihat semua agenda &rarr;
-            </a>
+            <div className="space-y-4">
+              {agendaDiklit(lang).map((agenda) => (
+                <div key={agenda.id} className="group bg-slate-800/50 hover:bg-slate-800 border border-slate-700 hover:border-emerald-500/50 rounded-2xl p-6 transition-all flex items-start">
+                  <div className="flex-shrink-0 w-20 h-20 bg-slate-900 border border-slate-700 group-hover:border-emerald-500/30 rounded-xl flex flex-col items-center justify-center mr-6 transition-colors">
+                    <span className="text-sm text-emerald-400 font-medium uppercase">{agenda.tanggal.split(' ')[1]}</span>
+                    <span className="text-2xl font-bold text-white">{agenda.tanggal.split(' ')[0]}</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center mb-2">
+                      <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
+                        agenda.status === 'Selesai' || agenda.status === 'Completed' 
+                          ? 'bg-slate-700 text-slate-300' 
+                          : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/20'
+                      }`}>
+                        {agenda.status}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">{agenda.judul}</h3>
+                    <p className="text-sm text-slate-400 flex items-center">
+                      <MapPin className="w-4 h-4 mr-1.5 opacity-70" /> {t(lang, 'Kampus UMLA', 'UMLA Campus')}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Inovasi & Edukasi */}
-          <div className="grid sm:grid-cols-2 gap-8">
-            <div>
-              <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                <span className="w-1.5 h-5 bg-orange-500 rounded-full mr-2"></span>
-                Inovasi Layanan
+          {/* Inovasi Layanan */}
+          <div>
+            <div className="mb-10">
+              <span className="text-blue-400 font-semibold tracking-wider uppercase text-sm mb-2 block">Pengembangan</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                {t(lang, 'Inovasi Layanan', 'Service Innovation')}
               </h2>
-              <div className="space-y-4">
-                {inovasiLayanan.map((inovasi) => (
-                  <div key={inovasi.id} className="bg-white border border-slate-200 p-4 rounded-xl hover:border-orange-200 hover:shadow-md transition-all">
-                    <h4 className="text-sm font-bold text-slate-800 mb-1">{inovasi.judul}</h4>
-                    <p className="text-xs text-slate-600">{inovasi.desc}</p>
-                  </div>
-                ))}
-              </div>
             </div>
-
-            <div>
-              <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                <span className="w-1.5 h-5 bg-red-500 rounded-full mr-2"></span>
-                Media Edukasi
-              </h2>
-              <div className="bg-slate-900 rounded-2xl p-5 text-white">
-                <div className="flex items-center mb-4 text-red-400">
-                  <PlayCircle className="w-6 h-6 mr-2" />
-                  <span className="font-bold text-sm">RSUMLA Podcast</span>
-                </div>
-                <ul className="space-y-3">
-                  {mediaEdukasi.map((edu) => (
-                    <li key={edu.id} className="group border-b border-slate-700 pb-3 last:border-0 last:pb-0">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">{edu.episode}</span>
-                      <a href="#" className="text-sm font-medium text-slate-200 group-hover:text-white leading-snug block mb-2">
-                        {edu.judul}
-                      </a>
-                      <button className="text-xs font-bold text-red-400 hover:text-red-300 flex items-center">
-                        Tonton Video <ChevronRight className="w-3 h-3 ml-1" />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {inovasiLayanan(lang).map((inovasi, idx) => {
+                const icons = [Sparkles, Activity, PlayCircle, Phone];
+                const Icon = icons[idx % icons.length];
+                return (
+                  <div key={inovasi.id} className="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 hover:bg-slate-800 transition-colors">
+                    <div className="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center mb-5">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-3">{inovasi.judul}</h3>
+                    <p className="text-sm text-slate-400 leading-relaxed">{inovasi.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+            
+            {/* CTA Box */}
+            <div className="mt-8 bg-gradient-to-br from-emerald-900 to-slate-800 rounded-2xl p-8 border border-emerald-800/50 relative overflow-hidden">
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-emerald-500/20 blur-3xl rounded-full"></div>
+              <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{t(lang, 'Butuh Bantuan?', 'Need Help?')}</h3>
+              <p className="text-emerald-100/80 mb-6 relative z-10 max-w-sm">
+                {t(lang, 'Tim layanan pelanggan kami siap membantu Anda 24/7 untuk informasi lebih lanjut.', 'Our customer service team is ready to help you 24/7 for further information.')}
+              </p>
+              <button className="px-6 py-3 bg-white text-emerald-900 font-bold rounded-xl hover:bg-emerald-50 transition-colors relative z-10 flex items-center">
+                <Phone className="w-5 h-5 mr-2" />
+                Hubungi Kami
+              </button>
             </div>
           </div>
 
         </div>
       </div>
     </section>
-  );
-};
-
-const Footer = () => {
-  return (
-    <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 border-t-4 border-emerald-600">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          
-          <div className="lg:col-span-2">
-            <div className="flex items-center mb-6">
-              <div className="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center mr-3 text-white font-bold text-lg">
-                RS
-              </div>
-              <div>
-                <h3 className="font-bold text-xl text-white leading-tight">RSUMLA</h3>
-                <p className="text-xs text-emerald-400 font-medium uppercase tracking-wider">Rumah Sakit Pendidikan</p>
-              </div>
-            </div>
-            <p className="text-sm text-slate-400 mb-6 max-w-md leading-relaxed">
-              Rumah Sakit Universitas Muhammadiyah Lamongan (RSUMLA) adalah rumah sakit pendidikan yang berkomitmen memberikan pelayanan kesehatan paripurna, bermutu, dan Islami.
-            </p>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-start">
-                <MapPin className="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-0.5" />
-                <span>Jl. Raya Plalangan Plosowahyu KM 2, Lamongan, Jawa Timur 62218</span>
-              </div>
-              <div className="flex items-center">
-                <Phone className="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" />
-                <span>(0322) 322356 (Hunting)</span>
-              </div>
-              <div className="flex items-center">
-                <Mail className="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" />
-                <span>info@rsumla.ac.id</span>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Tautan Cepat</h4>
-            <ul className="space-y-3 text-sm">
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Profil RSUMLA</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Jadwal Dokter</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Pendaftaran Online</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Ketersediaan Kamar</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Karir & Lowongan</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Layanan Publik</h4>
-            <ul className="space-y-3 text-sm">
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Standar Pelayanan Publik</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Pengaduan Masyarakat</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">PPID (Informasi Publik)</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Whistleblowing System</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Survei Kepuasan (IKM)</a></li>
-            </ul>
-          </div>
-
-        </div>
-
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-slate-500">
-            &copy; 2026 Instalasi Teknologi Komunikasi dan Informasi, RSUMLA.
-          </p>
-          <div className="flex space-x-6 text-xs text-slate-500">
-            <a href="#" className="hover:text-white transition-colors">Kebijakan Privasi</a>
-            <a href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</a>
-            <a href="#" className="hover:text-white transition-colors">Peta Situs</a>
-          </div>
-        </div>
-      </div>
-    </footer>
   );
 };
 
 export default function HomePageRSUMLA() {
+  const { lang } = useLangStore();
+
   return (
-    <div className="min-h-screen bg-slate-50 font-sans selection:bg-emerald-200 selection:text-emerald-900">
+    <div className="min-h-screen flex flex-col font-sans bg-white">
       <Navbar />
-      <main>
-        <Hero />
-        <AksesCepat />
-        <LayananUnggulan />
-        <BeritaDanSeputar />
-        <DiklitDanInovasi />
+      <main className="flex-grow">
+        <Hero lang={lang} />
+        <Statistik lang={lang} />
+        <AksesCepat lang={lang} />
+        <LayananUnggulan lang={lang} />
+        <BeritaDanSeputar lang={lang} />
+        <DiklitDanInovasi lang={lang} />
       </main>
       <Footer />
     </div>
