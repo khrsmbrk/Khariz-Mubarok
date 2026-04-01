@@ -231,35 +231,97 @@ export default function TentangKami() {
         </section>
 
         {/* Mars dan Himne */}
-        <section className="bg-slate-900 rounded-3xl overflow-hidden shadow-xl">
-          <div className="p-8 md:p-12 text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">
-              {t(lang, 'Mars dan Himne', 'Anthem and Hymn')}
-            </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto mb-12">
-              {t(lang, 'Dengarkan Mars dan Himne kebanggaan Rumah Sakit Universitas Muhammadiyah Lamongan.', 'Listen to the proud Anthem and Hymn of Muhammadiyah Lamongan University Hospital.')}
-            </p>
+        <section className="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100">
+          <div className="p-8 md:p-12">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                {t(lang, 'Mars dan Himne', 'Anthem and Hymn')}
+              </h2>
+              <p className="text-slate-600 max-w-2xl mx-auto">
+                {t(lang, 'Dengarkan Mars dan Himne kebanggaan Rumah Sakit Universitas Muhammadiyah Lamongan.', 'Listen to the proud Anthem and Hymn of Muhammadiyah Lamongan University Hospital.')}
+              </p>
+            </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-emerald-400">Mars RS UMLA</h3>
-                <div className="aspect-video bg-slate-800 rounded-xl overflow-hidden border border-slate-700 flex items-center justify-center">
-                  {/* YouTube Embed Placeholder */}
-                  <div className="text-slate-500 flex flex-col items-center">
-                    <PlayCircle className="w-12 h-12 mb-2 opacity-50" />
-                    <span>Video Mars RS UMLA</span>
+            <div className="grid lg:grid-cols-2 gap-12">
+              {/* Mars */}
+              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-emerald-800">Mars RS UMLA</h3>
+                  <span className="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full uppercase tracking-wider">Official</span>
+                </div>
+                
+                <div className="aspect-video bg-slate-900 rounded-xl overflow-hidden relative group mb-6 shadow-inner">
+                  <img 
+                    src="https://picsum.photos/seed/mars-rsumla/800/450" 
+                    alt="Thumbnail Mars RS UMLA" 
+                    className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-300"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <button className="w-16 h-16 bg-emerald-600/90 hover:bg-emerald-500 text-white rounded-full flex items-center justify-center backdrop-blur-sm transition-transform transform group-hover:scale-110 shadow-lg">
+                      <PlayCircle className="w-8 h-8 ml-1" />
+                    </button>
                   </div>
+                  <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                    <span className="text-white font-medium drop-shadow-md">Video Mars RS UMLA</span>
+                    <span className="text-white/80 text-sm bg-black/40 px-2 py-1 rounded backdrop-blur-sm">03:45</span>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-slate-800 flex items-center">
+                    <Star className="w-4 h-4 mr-2 text-amber-500" /> Lirik Mars (Kutipan)
+                  </h4>
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 text-slate-600 text-sm italic leading-relaxed">
+                    "Melangkah maju bersama RS UMLA...<br/>
+                    Mengabdi untuk negeri, sehatkan masyarakat...<br/>
+                    Dengan ilmu dan iman, kita wujudkan...<br/>
+                    Pelayanan prima, penuh kasih sayang..."
+                  </div>
+                  <button className="w-full py-2.5 bg-white border border-emerald-200 text-emerald-700 font-medium rounded-xl hover:bg-emerald-50 transition-colors flex items-center justify-center">
+                    <Download className="w-4 h-4 mr-2" /> Unduh Lirik Lengkap
+                  </button>
                 </div>
               </div>
               
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-emerald-400">Himne RS UMLA</h3>
-                <div className="aspect-video bg-slate-800 rounded-xl overflow-hidden border border-slate-700 flex items-center justify-center">
-                  {/* YouTube Embed Placeholder */}
-                  <div className="text-slate-500 flex flex-col items-center">
-                    <PlayCircle className="w-12 h-12 mb-2 opacity-50" />
-                    <span>Video Himne RS UMLA</span>
+              {/* Himne */}
+              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-emerald-800">Himne RS UMLA</h3>
+                  <span className="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full uppercase tracking-wider">Official</span>
+                </div>
+                
+                <div className="aspect-video bg-slate-900 rounded-xl overflow-hidden relative group mb-6 shadow-inner">
+                  <img 
+                    src="https://picsum.photos/seed/himne-rsumla/800/450" 
+                    alt="Thumbnail Himne RS UMLA" 
+                    className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-300"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <button className="w-16 h-16 bg-emerald-600/90 hover:bg-emerald-500 text-white rounded-full flex items-center justify-center backdrop-blur-sm transition-transform transform group-hover:scale-110 shadow-lg">
+                      <PlayCircle className="w-8 h-8 ml-1" />
+                    </button>
                   </div>
+                  <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                    <span className="text-white font-medium drop-shadow-md">Video Himne RS UMLA</span>
+                    <span className="text-white/80 text-sm bg-black/40 px-2 py-1 rounded backdrop-blur-sm">04:20</span>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-slate-800 flex items-center">
+                    <Star className="w-4 h-4 mr-2 text-amber-500" /> Lirik Himne (Kutipan)
+                  </h4>
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 text-slate-600 text-sm italic leading-relaxed">
+                    "Dalam naungan ridho Ilahi...<br/>
+                    RS UMLA berdiri teguh mengabdi...<br/>
+                    Menyembuhkan luka, menyejukkan jiwa...<br/>
+                    Bakti kami untuk kemanusiaan..."
+                  </div>
+                  <button className="w-full py-2.5 bg-white border border-emerald-200 text-emerald-700 font-medium rounded-xl hover:bg-emerald-50 transition-colors flex items-center justify-center">
+                    <Download className="w-4 h-4 mr-2" /> Unduh Lirik Lengkap
+                  </button>
                 </div>
               </div>
             </div>

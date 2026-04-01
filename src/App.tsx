@@ -24,6 +24,12 @@ import SRMPengaturan from './pages/SRM/SRMPengaturan';
 import SRMIntegrasi from './pages/SRM/SRMIntegrasi';
 import SRMKunjungan from './pages/SRM/SRMKunjungan';
 import SRMJadwalDokter from './pages/SRM/SRMJadwalDokter';
+import SRMBPJS from './pages/SRM/SRMBPJS';
+import SRMPencarian from './pages/SRM/SRMPencarian';
+import SRMLaporanPDF from './pages/SRM/SRMLaporanPDF';
+import SRMWaReminder from './pages/SRM/SRMWaReminder';
+import SRMVaksinasi from './pages/SRM/SRMVaksinasi';
+import SRMLaporan from './pages/SRM/SRMLaporan';
 import ComingSoon from './components/ComingSoon';
 
 function App() {
@@ -63,14 +69,14 @@ function App() {
           <Route path="pasien" element={<SRMPasien />} />
           <Route path="pengaturan" element={<SRMPengaturan />} />
           <Route path="integrasi/satusehat" element={<SRMIntegrasi />} />
-          <Route path="integrasi/bpjs" element={<ComingSoon title="Bridging BPJS Kesehatan" />} />
+          <Route path="integrasi/bpjs" element={<SRMBPJS />} />
           <Route path="kunjungan" element={<SRMKunjungan />} />
           <Route path="jadwal-dokter" element={<SRMJadwalDokter />} />
-          <Route path="pencarian" element={<ComingSoon title="Pencarian Lanjutan" />} />
-          <Route path="laporan-pdf" element={<ComingSoon title="Laporan PDF" />} />
-          <Route path="wa-reminder" element={<ComingSoon title="WhatsApp Reminder" />} />
-          <Route path="vaksinasi" element={<ComingSoon title="Riwayat Vaksinasi" />} />
-          <Route path="laporan" element={<ComingSoon title="Laporan & Analitik" />} />
+          <Route path="pencarian" element={<SRMPencarian />} />
+          <Route path="laporan-pdf" element={<SRMLaporanPDF />} />
+          <Route path="wa-reminder" element={<SRMWaReminder />} />
+          <Route path="vaksinasi" element={<SRMVaksinasi />} />
+          <Route path="laporan" element={<SRMLaporan />} />
           <Route path="*" element={<ComingSoon title="Halaman Tidak Ditemukan" />} />
         </Route>
       </Routes>

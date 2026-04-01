@@ -57,12 +57,12 @@ const SRMAntrian = () => {
     <div className="bg-white border border-slate-300 shadow-sm rounded-sm p-4 h-full flex flex-col md:flex-row gap-4">
       {/* Left Panel - Queue Display */}
       <div className="w-full md:w-1/3 flex flex-col gap-4">
-        <div className="bg-slate-800 rounded-md p-4 flex flex-col items-center justify-center text-white shadow-md h-full">
+        <div className="bg-slate-50 border border-slate-200 rounded-md p-4 flex flex-col items-center justify-center text-slate-900 shadow-sm h-full">
           <div className="flex items-center gap-2 mb-4">
             <ClipboardList className="w-6 h-6" />
             <h2 className="text-xl font-bold tracking-wider">ANTRIAN PASIEN</h2>
           </div>
-          <div className="flex justify-between w-full text-sm text-slate-300 mb-6">
+          <div className="flex justify-between w-full text-sm text-slate-500 mb-6">
             <span>
               {currentTime.toLocaleDateString("id-ID", {
                 weekday: "long",
@@ -71,13 +71,13 @@ const SRMAntrian = () => {
                 day: "numeric",
               })}
             </span>
-            <span className="text-yellow-400 font-mono text-lg">
+            <span className="text-blue-600 font-mono text-lg font-bold">
               {currentTime.toLocaleTimeString("id-ID")}
             </span>
           </div>
 
           {/* Current Queue */}
-          <div className="bg-green-500 w-full rounded-md p-6 flex flex-col items-center justify-center mb-4 shadow-inner">
+          <div className="bg-emerald-100 text-emerald-800 w-full rounded-md p-6 flex flex-col items-center justify-center mb-4 shadow-sm border border-emerald-200">
             <span className="text-sm font-medium mb-2 uppercase tracking-wider">
               Nomor Antrian Sekarang
             </span>
@@ -90,7 +90,7 @@ const SRMAntrian = () => {
           </div>
 
           {/* Next Queue */}
-          <div className="bg-blue-500 w-full rounded-md p-6 flex flex-col items-center justify-center mb-4 shadow-inner">
+          <div className="bg-blue-100 text-blue-800 w-full rounded-md p-6 flex flex-col items-center justify-center mb-4 shadow-sm border border-blue-200">
             <span className="text-sm font-medium mb-2 uppercase tracking-wider">
               Antrian Berikutnya
             </span>
@@ -104,15 +104,15 @@ const SRMAntrian = () => {
 
           {/* Stats */}
           <div className="flex justify-between w-full gap-2 mt-auto">
-            <div className="bg-purple-600 flex-1 rounded-md p-4 flex flex-col items-center justify-center shadow-inner">
+            <div className="bg-purple-100 text-purple-800 border border-purple-200 flex-1 rounded-md p-4 flex flex-col items-center justify-center shadow-sm">
               <span className="text-xs font-medium mb-1">Total Hari Ini</span>
               <span className="text-2xl font-bold">{totalCount}</span>
             </div>
-            <div className="bg-orange-500 flex-1 rounded-md p-4 flex flex-col items-center justify-center shadow-inner">
+            <div className="bg-orange-100 text-orange-800 border border-orange-200 flex-1 rounded-md p-4 flex flex-col items-center justify-center shadow-sm">
               <span className="text-xs font-medium mb-1">Menunggu</span>
               <span className="text-2xl font-bold">{waitingCount}</span>
             </div>
-            <div className="bg-teal-500 flex-1 rounded-md p-4 flex flex-col items-center justify-center shadow-inner">
+            <div className="bg-teal-100 text-teal-800 border border-teal-200 flex-1 rounded-md p-4 flex flex-col items-center justify-center shadow-sm">
               <span className="text-xs font-medium mb-1">Selesai</span>
               <span className="text-2xl font-bold">{finishedCount}</span>
             </div>
@@ -206,21 +206,21 @@ const SRMAntrian = () => {
           </div>
           <div className="flex-1 overflow-auto">
             <table className="w-full text-sm text-left">
-              <thead className="bg-slate-600 text-white text-xs sticky top-0">
+              <thead className="bg-slate-100 text-slate-700 text-xs sticky top-0 border-b border-slate-300">
                 <tr>
-                  <th className="px-3 py-2 font-medium border-r border-slate-500 text-center">
+                  <th className="px-3 py-2 font-medium border-r border-slate-300 text-center">
                     No. Antrian
                   </th>
-                  <th className="px-3 py-2 font-medium border-r border-slate-500 text-center">
+                  <th className="px-3 py-2 font-medium border-r border-slate-300 text-center">
                     No. RM
                   </th>
-                  <th className="px-3 py-2 font-medium border-r border-slate-500">
+                  <th className="px-3 py-2 font-medium border-r border-slate-300">
                     Nama Pasien
                   </th>
-                  <th className="px-3 py-2 font-medium border-r border-slate-500 text-center">
+                  <th className="px-3 py-2 font-medium border-r border-slate-300 text-center">
                     Waktu Daftar
                   </th>
-                  <th className="px-3 py-2 font-medium border-r border-slate-500 text-center">
+                  <th className="px-3 py-2 font-medium border-r border-slate-300 text-center">
                     Status
                   </th>
                   <th className="px-3 py-2 font-medium text-center">Aksi</th>

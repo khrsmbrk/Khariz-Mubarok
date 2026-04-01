@@ -42,8 +42,8 @@ export default function SiteSettingsModule() {
     <div className="space-y-6 max-w-4xl mx-auto pb-12">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-white">Pengaturan Website</h2>
-          <p className="text-slate-400 text-sm mt-1">Kelola tampilan dan konten halaman utama website RS UMLA.</p>
+          <h2 className="text-2xl font-bold text-slate-900">Pengaturan Website</h2>
+          <p className="text-slate-500 text-sm mt-1">Kelola tampilan dan konten halaman utama website RS UMLA.</p>
         </div>
         <button 
           onClick={handleSave}
@@ -56,23 +56,23 @@ export default function SiteSettingsModule() {
       </div>
 
       {saveMessage && (
-        <div className="bg-emerald-900/50 border border-emerald-500 text-emerald-200 p-4 rounded-lg mb-6 flex items-center">
-          <div className="w-2 h-2 bg-emerald-400 rounded-full mr-3 animate-pulse"></div>
+        <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 p-4 rounded-lg mb-6 flex items-center">
+          <div className="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></div>
           {saveMessage}
         </div>
       )}
 
       {/* Identitas Website */}
-      <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-        <div className="p-4 border-b border-slate-700 bg-slate-800/50 flex items-center">
-          <ImageIcon className="w-5 h-5 text-blue-400 mr-2" />
-          <h3 className="font-semibold text-white">Identitas Visual</h3>
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+        <div className="p-4 border-b border-slate-200 bg-slate-50 flex items-center">
+          <ImageIcon className="w-5 h-5 text-blue-600 mr-2" />
+          <h3 className="font-semibold text-slate-900">Identitas Visual</h3>
         </div>
         <div className="p-6 space-y-6">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Logo Website</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Logo Website</label>
             <div className="flex items-start space-x-6">
-              <div className="w-24 h-24 bg-white rounded-xl border-2 border-slate-600 flex items-center justify-center overflow-hidden shrink-0">
+              <div className="w-24 h-24 bg-white rounded-xl border-2 border-slate-200 flex items-center justify-center overflow-hidden shrink-0">
                 {formData.logoUrl ? (
                   <img src={formData.logoUrl} alt="Logo Preview" className="w-full h-full object-contain p-2" />
                 ) : (
@@ -89,22 +89,22 @@ export default function SiteSettingsModule() {
                 />
                 <button 
                   onClick={() => logoInputRef.current?.click()}
-                  className="flex items-center px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-medium transition-colors mb-2"
+                  className="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-medium transition-colors mb-2"
                 >
                   <Upload className="w-4 h-4 mr-2" /> Unggah Logo Baru
                 </button>
-                <p className="text-xs text-slate-400">Format yang disarankan: PNG dengan background transparan. Ukuran maksimal 2MB.</p>
+                <p className="text-xs text-slate-500">Format yang disarankan: PNG dengan background transparan. Ukuran maksimal 2MB.</p>
               </div>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Warna Utama (Tema)</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Warna Utama (Tema)</label>
             <select 
               name="primaryColor"
               value={formData.primaryColor}
               onChange={handleChange}
-              className="w-full md:w-1/2 bg-slate-900 border border-slate-600 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full md:w-1/2 bg-white border border-slate-200 rounded-lg p-2.5 text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
             >
               <option value="emerald">Emerald (Hijau RS UMLA)</option>
               <option value="blue">Blue (Biru)</option>
@@ -116,19 +116,19 @@ export default function SiteSettingsModule() {
       </div>
 
       {/* Konten Hero Section */}
-      <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-        <div className="p-4 border-b border-slate-700 bg-slate-800/50 flex items-center">
-          <Type className="w-5 h-5 text-blue-400 mr-2" />
-          <h3 className="font-semibold text-white">Konten Beranda (Hero Section)</h3>
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+        <div className="p-4 border-b border-slate-200 bg-slate-50 flex items-center">
+          <Type className="w-5 h-5 text-blue-600 mr-2" />
+          <h3 className="font-semibold text-slate-900">Konten Beranda (Hero Section)</h3>
         </div>
         <div className="p-6 space-y-6">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Gambar Latar Belakang (Background)</label>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Gambar Latar Belakang (Background)</label>
             <div className="flex flex-col space-y-4">
               {formData.heroImage && (
-                <div className="w-full h-48 bg-slate-900 rounded-xl border border-slate-600 overflow-hidden relative">
+                <div className="w-full h-48 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
                   <img src={formData.heroImage} alt="Hero Preview" className="w-full h-full object-cover opacity-80" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/80 to-transparent"></div>
                 </div>
               )}
               <div>
@@ -141,60 +141,60 @@ export default function SiteSettingsModule() {
                 />
                 <button 
                   onClick={() => heroInputRef.current?.click()}
-                  className="flex items-center px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-medium transition-colors"
+                  className="flex items-center px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-medium transition-colors"
                 >
                   <Upload className="w-4 h-4 mr-2" /> Unggah Gambar Latar
                 </button>
-                <p className="text-xs text-slate-400 mt-2">Gambar resolusi tinggi (1920x1080) disarankan untuk hasil terbaik.</p>
+                <p className="text-xs text-slate-500 mt-2">Gambar resolusi tinggi (1920x1080) disarankan untuk hasil terbaik.</p>
               </div>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <h4 className="text-sm font-semibold text-slate-200 border-b border-slate-700 pb-2">Bahasa Indonesia</h4>
+              <h4 className="text-sm font-semibold text-slate-900 border-b border-slate-200 pb-2">Bahasa Indonesia</h4>
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">Judul Utama</label>
+                <label className="block text-xs font-medium text-slate-500 mb-1">Judul Utama</label>
                 <textarea 
                   name="heroTitleId"
                   value={formData.heroTitleId}
                   onChange={handleChange}
                   rows={2}
-                  className="w-full bg-slate-900 border border-slate-600 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                  className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">Sub-judul (Deskripsi)</label>
+                <label className="block text-xs font-medium text-slate-500 mb-1">Sub-judul (Deskripsi)</label>
                 <textarea 
                   name="heroSubtitleId"
                   value={formData.heroSubtitleId}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full bg-slate-900 border border-slate-600 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                  className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
                 />
               </div>
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-sm font-semibold text-slate-200 border-b border-slate-700 pb-2">English</h4>
+              <h4 className="text-sm font-semibold text-slate-900 border-b border-slate-200 pb-2">English</h4>
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">Main Title</label>
+                <label className="block text-xs font-medium text-slate-500 mb-1">Main Title</label>
                 <textarea 
                   name="heroTitleEn"
                   value={formData.heroTitleEn}
                   onChange={handleChange}
                   rows={2}
-                  className="w-full bg-slate-900 border border-slate-600 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                  className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">Subtitle (Description)</label>
+                <label className="block text-xs font-medium text-slate-500 mb-1">Subtitle (Description)</label>
                 <textarea 
                   name="heroSubtitleEn"
                   value={formData.heroSubtitleEn}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full bg-slate-900 border border-slate-600 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                  className="w-full bg-white border border-slate-200 rounded-lg p-2.5 text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
                 />
               </div>
             </div>

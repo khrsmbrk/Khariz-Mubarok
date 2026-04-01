@@ -87,15 +87,15 @@ const Carousel = () => {
   const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
 
   return (
-    <section className="py-16 bg-slate-900 text-white overflow-hidden">
+    <section className="py-16 bg-slate-50 text-slate-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">Preview Tampilan SRM</h2>
-          <p className="text-slate-400">Ambil gambar dari folder judul/ (1.png–8.png)</p>
+          <p className="text-slate-500">Ambil gambar dari folder judul/ (1.png–8.png)</p>
         </div>
         
         <div className="relative max-w-5xl mx-auto">
-          <div className="aspect-video bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 relative shadow-2xl">
+          <div className="aspect-video bg-white rounded-2xl overflow-hidden border border-slate-200 relative shadow-xl">
             <img 
               src={`https://picsum.photos/seed/srm${images[current]}/1200/675`} 
               alt={`Preview SRM ${images[current]}`}
@@ -103,18 +103,18 @@ const Carousel = () => {
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="text-4xl font-bold text-white/50 drop-shadow-lg">Preview SRM {images[current]}</span>
+              <span className="text-4xl font-bold text-white/80 drop-shadow-lg">Preview SRM {images[current]}</span>
             </div>
             
-            <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-sm font-medium">
+            <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-sm font-medium text-white">
               {current + 1} / {images.length}
             </div>
           </div>
           
-          <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-colors">
+          <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/10 hover:bg-black/20 text-white backdrop-blur-md rounded-full flex items-center justify-center transition-colors">
             <ChevronLeft className="w-6 h-6" />
           </button>
-          <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-colors">
+          <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/10 hover:bg-black/20 text-white backdrop-blur-md rounded-full flex items-center justify-center transition-colors">
             <ChevronRight className="w-6 h-6" />
           </button>
         </div>
@@ -255,36 +255,36 @@ const Keamanan = () => {
 
 const Testimoni = () => {
   return (
-    <section className="py-20 bg-slate-900 text-white">
+    <section className="py-20 bg-white text-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">Yang Biasanya Dirasakan Klinik</h2>
-          <p className="text-slate-400">Kalimat testimoni bisa kamu ganti sesuai kebutuhan.</p>
+          <p className="text-slate-500">Kalimat testimoni bisa kamu ganti sesuai kebutuhan.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 relative">
+          <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 relative shadow-sm">
             <div className="text-4xl text-blue-500 absolute top-4 left-4 opacity-20">"</div>
-            <p className="text-lg text-slate-300 mb-6 relative z-10">“Antrian jadi tertib, panggilan pasien jelas. Admin lebih cepat input data.”</p>
+            <p className="text-lg text-slate-700 mb-6 relative z-10">“Antrian jadi tertib, panggilan pasien jelas. Admin lebih cepat input data.”</p>
             <div>
-              <p className="font-bold text-white">Admin Klinik</p>
-              <p className="text-sm text-slate-400">Klinik Pratama</p>
+              <p className="font-bold text-slate-900">Admin Klinik</p>
+              <p className="text-sm text-slate-500">Klinik Pratama</p>
             </div>
           </div>
-          <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 relative">
+          <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 relative shadow-sm">
             <div className="text-4xl text-blue-500 absolute top-4 left-4 opacity-20">"</div>
-            <p className="text-lg text-slate-300 mb-6 relative z-10">“Template resep & surat bikin pelayanan lebih cepat, tidak ketik ulang.”</p>
+            <p className="text-lg text-slate-700 mb-6 relative z-10">“Template resep & surat bikin pelayanan lebih cepat, tidak ketik ulang.”</p>
             <div>
-              <p className="font-bold text-white">Dokter</p>
-              <p className="text-sm text-slate-400">Praktek Mandiri</p>
+              <p className="font-bold text-slate-900">Dokter</p>
+              <p className="text-sm text-slate-500">Praktek Mandiri</p>
             </div>
           </div>
-          <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 relative">
+          <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 relative shadow-sm">
             <div className="text-4xl text-blue-500 absolute top-4 left-4 opacity-20">"</div>
-            <p className="text-lg text-slate-300 mb-6 relative z-10">“Laporan Excel/PDF gampang, dan data aman karena ada backup & restore.”</p>
+            <p className="text-lg text-slate-700 mb-6 relative z-10">“Laporan Excel/PDF gampang, dan data aman karena ada backup & restore.”</p>
             <div>
-              <p className="font-bold text-white">Pimpinan Klinik</p>
-              <p className="text-sm text-slate-400">Cabang 2</p>
+              <p className="font-bold text-slate-900">Pimpinan Klinik</p>
+              <p className="text-sm text-slate-500">Cabang 2</p>
             </div>
           </div>
         </div>
@@ -295,7 +295,7 @@ const Testimoni = () => {
 
 const Footer = () => {
   return (
-    <footer id="kontak" className="bg-slate-950 py-8 border-t border-slate-800">
+    <footer id="kontak" className="bg-slate-50 py-8 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p className="text-slate-500 text-sm">© 2026 SRUMLA • All rights reserved.</p>
       </div>

@@ -19,36 +19,36 @@ const Hero = ({ lang }: { lang: Lang }) => {
   const { settings } = useSiteStore();
   
   return (
-    <div className="relative bg-slate-900 overflow-hidden min-h-[90vh] flex items-center">
+    <div className="relative bg-slate-50 overflow-hidden min-h-[90vh] flex items-center">
       <div className="absolute inset-0">
         <img 
           src={settings.heroImage} 
           alt="RS UMLA Building" 
-          className="w-full h-full object-cover opacity-30"
+          className="w-full h-full object-cover opacity-20"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-slate-900/80 to-slate-900/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-50/95 via-white/90 to-white/50"></div>
       </div>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-700 text-sm font-medium mb-6">
               <Sparkles className="w-4 h-4 mr-2" />
               {t(lang, 'Layanan Kesehatan Terpadu & Modern', 'Integrated & Modern Healthcare')}
             </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-[1.1] whitespace-pre-line">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight mb-6 leading-[1.1] whitespace-pre-line">
               {lang === 'ID' ? settings.heroTitleId : settings.heroTitleEn}
             </h1>
-            <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed font-light">
+            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl leading-relaxed font-light">
               {lang === 'ID' ? settings.heroSubtitleId : settings.heroSubtitleEn}
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/portal/pendaftaran" className="group px-8 py-4 text-base font-bold text-emerald-950 bg-emerald-400 hover:bg-emerald-300 rounded-full shadow-[0_0_40px_rgba(52,211,153,0.3)] transition-all flex items-center">
+              <Link to="/portal/pendaftaran" className="group px-8 py-4 text-base font-bold text-white bg-emerald-600 hover:bg-emerald-500 rounded-full shadow-[0_0_40px_rgba(52,211,153,0.3)] transition-all flex items-center">
                 {t(lang, 'Pendaftaran Online', 'Online Registration')}
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/srm/dashboard" className="px-8 py-4 text-base font-bold text-white bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-md rounded-full transition-all">
+              <Link to="/srm/dashboard" className="px-8 py-4 text-base font-bold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 backdrop-blur-md rounded-full transition-all shadow-sm">
                 SIM RS UMLA
               </Link>
             </div>
@@ -56,30 +56,30 @@ const Hero = ({ lang }: { lang: Lang }) => {
           
           {/* Decorative Elements for Hero Right Side */}
           <div className="hidden lg:block relative">
-            <div className="absolute -inset-4 bg-emerald-500/20 blur-3xl rounded-full"></div>
+            <div className="absolute -inset-4 bg-emerald-500/10 blur-3xl rounded-full"></div>
             <div className="relative grid grid-cols-2 gap-4">
               <div className="space-y-4 translate-y-8">
-                <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
-                  <HeartPulse className="w-10 h-10 text-emerald-400 mb-4" />
-                  <h3 className="text-white font-bold text-xl mb-1">24/7</h3>
-                  <p className="text-slate-400 text-sm">{t(lang, 'Layanan Gawat Darurat', 'Emergency Services')}</p>
+                <div className="bg-white/80 backdrop-blur-xl border border-slate-200 p-6 rounded-3xl shadow-sm">
+                  <HeartPulse className="w-10 h-10 text-emerald-500 mb-4" />
+                  <h3 className="text-slate-900 font-bold text-xl mb-1">24/7</h3>
+                  <p className="text-slate-500 text-sm">{t(lang, 'Layanan Gawat Darurat', 'Emergency Services')}</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
-                  <ShieldCheck className="w-10 h-10 text-blue-400 mb-4" />
-                  <h3 className="text-white font-bold text-xl mb-1">{t(lang, 'Terakreditasi', 'Accredited')}</h3>
-                  <p className="text-slate-400 text-sm">{t(lang, 'Paripurna KARS', 'Plenary KARS')}</p>
+                <div className="bg-white/80 backdrop-blur-xl border border-slate-200 p-6 rounded-3xl shadow-sm">
+                  <ShieldCheck className="w-10 h-10 text-blue-500 mb-4" />
+                  <h3 className="text-slate-900 font-bold text-xl mb-1">{t(lang, 'Terakreditasi', 'Accredited')}</h3>
+                  <p className="text-slate-500 text-sm">{t(lang, 'Paripurna KARS', 'Plenary KARS')}</p>
                 </div>
               </div>
               <div className="space-y-4">
-                <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
-                  <Users className="w-10 h-10 text-purple-400 mb-4" />
-                  <h3 className="text-white font-bold text-xl mb-1">50+</h3>
-                  <p className="text-slate-400 text-sm">{t(lang, 'Dokter Spesialis', 'Specialist Doctors')}</p>
+                <div className="bg-white/80 backdrop-blur-xl border border-slate-200 p-6 rounded-3xl shadow-sm">
+                  <Users className="w-10 h-10 text-purple-500 mb-4" />
+                  <h3 className="text-slate-900 font-bold text-xl mb-1">50+</h3>
+                  <p className="text-slate-500 text-sm">{t(lang, 'Dokter Spesialis', 'Specialist Doctors')}</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-6 rounded-3xl">
-                  <BedDouble className="w-10 h-10 text-amber-400 mb-4" />
-                  <h3 className="text-white font-bold text-xl mb-1">200+</h3>
-                  <p className="text-slate-400 text-sm">{t(lang, 'Kapasitas Tempat Tidur', 'Bed Capacity')}</p>
+                <div className="bg-white/80 backdrop-blur-xl border border-slate-200 p-6 rounded-3xl shadow-sm">
+                  <BedDouble className="w-10 h-10 text-amber-500 mb-4" />
+                  <h3 className="text-slate-900 font-bold text-xl mb-1">200+</h3>
+                  <p className="text-slate-500 text-sm">{t(lang, 'Kapasitas Tempat Tidur', 'Bed Capacity')}</p>
                 </div>
               </div>
             </div>
@@ -273,37 +273,37 @@ const BeritaDanSeputar = ({ lang }: { lang: Lang }) => {
 
 const DiklitDanInovasi = ({ lang }: { lang: Lang }) => {
   return (
-    <section className="py-24 bg-slate-900 text-white">
+    <section className="py-24 bg-white text-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16">
           
           {/* Diklit & Agenda */}
           <div>
             <div className="mb-10">
-              <span className="text-emerald-400 font-semibold tracking-wider uppercase text-sm mb-2 block">Pendidikan & Penelitian</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+              <span className="text-emerald-600 font-semibold tracking-wider uppercase text-sm mb-2 block">Pendidikan & Penelitian</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
                 {t(lang, 'Agenda Diklit', 'Education & Research Agenda')}
               </h2>
             </div>
             <div className="space-y-4">
               {agendaDiklit(lang).map((agenda) => (
-                <div key={agenda.id} className="group bg-slate-800/50 hover:bg-slate-800 border border-slate-700 hover:border-emerald-500/50 rounded-2xl p-6 transition-all flex items-start">
-                  <div className="flex-shrink-0 w-20 h-20 bg-slate-900 border border-slate-700 group-hover:border-emerald-500/30 rounded-xl flex flex-col items-center justify-center mr-6 transition-colors">
-                    <span className="text-sm text-emerald-400 font-medium uppercase">{agenda.tanggal.split(' ')[1]}</span>
-                    <span className="text-2xl font-bold text-white">{agenda.tanggal.split(' ')[0]}</span>
+                <div key={agenda.id} className="group bg-slate-50 hover:bg-white border border-slate-200 hover:border-emerald-200 shadow-sm rounded-2xl p-6 transition-all flex items-start">
+                  <div className="flex-shrink-0 w-20 h-20 bg-white border border-slate-200 group-hover:border-emerald-200 rounded-xl flex flex-col items-center justify-center mr-6 transition-colors">
+                    <span className="text-sm text-emerald-600 font-medium uppercase">{agenda.tanggal.split(' ')[1]}</span>
+                    <span className="text-2xl font-bold text-slate-900">{agenda.tanggal.split(' ')[0]}</span>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center mb-2">
                       <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
                         agenda.status === 'Selesai' || agenda.status === 'Completed' 
-                          ? 'bg-slate-700 text-slate-300' 
-                          : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/20'
+                          ? 'bg-slate-200 text-slate-600' 
+                          : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
                       }`}>
                         {agenda.status}
                       </span>
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">{agenda.judul}</h3>
-                    <p className="text-sm text-slate-400 flex items-center">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">{agenda.judul}</h3>
+                    <p className="text-sm text-slate-500 flex items-center">
                       <MapPin className="w-4 h-4 mr-1.5 opacity-70" /> {t(lang, 'Kampus UMLA', 'UMLA Campus')}
                     </p>
                   </div>
@@ -315,8 +315,8 @@ const DiklitDanInovasi = ({ lang }: { lang: Lang }) => {
           {/* Inovasi Layanan */}
           <div>
             <div className="mb-10">
-              <span className="text-blue-400 font-semibold tracking-wider uppercase text-sm mb-2 block">Pengembangan</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+              <span className="text-blue-600 font-semibold tracking-wider uppercase text-sm mb-2 block">Pengembangan</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
                 {t(lang, 'Inovasi Layanan', 'Service Innovation')}
               </h2>
             </div>
@@ -325,25 +325,25 @@ const DiklitDanInovasi = ({ lang }: { lang: Lang }) => {
                 const icons = [Sparkles, Activity, PlayCircle, Phone];
                 const Icon = icons[idx % icons.length];
                 return (
-                  <div key={inovasi.id} className="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 hover:bg-slate-800 transition-colors">
-                    <div className="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center mb-5">
+                  <div key={inovasi.id} className="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:bg-white hover:shadow-sm transition-colors">
+                    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-5">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-3">{inovasi.judul}</h3>
-                    <p className="text-sm text-slate-400 leading-relaxed">{inovasi.desc}</p>
+                    <h3 className="text-lg font-bold text-slate-900 mb-3">{inovasi.judul}</h3>
+                    <p className="text-sm text-slate-500 leading-relaxed">{inovasi.desc}</p>
                   </div>
                 );
               })}
             </div>
             
             {/* CTA Box */}
-            <div className="mt-8 bg-gradient-to-br from-emerald-900 to-slate-800 rounded-2xl p-8 border border-emerald-800/50 relative overflow-hidden">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-emerald-500/20 blur-3xl rounded-full"></div>
-              <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{t(lang, 'Butuh Bantuan?', 'Need Help?')}</h3>
-              <p className="text-emerald-100/80 mb-6 relative z-10 max-w-sm">
+            <div className="mt-8 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 border border-emerald-200 relative overflow-hidden">
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white/40 blur-3xl rounded-full"></div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-3 relative z-10">{t(lang, 'Butuh Bantuan?', 'Need Help?')}</h3>
+              <p className="text-emerald-800 mb-6 relative z-10 max-w-sm">
                 {t(lang, 'Tim layanan pelanggan kami siap membantu Anda 24/7 untuk informasi lebih lanjut.', 'Our customer service team is ready to help you 24/7 for further information.')}
               </p>
-              <button className="px-6 py-3 bg-white text-emerald-900 font-bold rounded-xl hover:bg-emerald-50 transition-colors relative z-10 flex items-center">
+              <button className="px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-colors relative z-10 flex items-center">
                 <Phone className="w-5 h-5 mr-2" />
                 Hubungi Kami
               </button>

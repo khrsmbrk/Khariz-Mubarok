@@ -40,11 +40,11 @@ const QrAttendanceModule = ({ user }: { user: any }) => {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl shadow-sm border border-slate-700 p-6">
-      <h2 className="text-lg font-semibold text-white mb-2">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <h2 className="text-lg font-semibold text-slate-900 mb-2">
         Modul Absensi QR Karyawan
       </h2>
-      <p className="text-xs text-slate-400 mb-4">
+      <p className="text-xs text-slate-500 mb-4">
         Simulasi pencatatan kehadiran menggunakan QR ID karyawan. Di kelas, QR
         dapat digenerate dan dipindai kamera.
       </p>
@@ -55,7 +55,7 @@ const QrAttendanceModule = ({ user }: { user: any }) => {
           placeholder="Scan / masukkan QR ID, contoh: QR-RSML-0001"
           value={scanValue}
           onChange={(e) => setScanValue(e.target.value)}
-          className="flex-1 p-3 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-slate-500"
+          className="flex-1 p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-slate-400"
         />
         <button
           onClick={handleScan}
@@ -66,27 +66,27 @@ const QrAttendanceModule = ({ user }: { user: any }) => {
       </div>
 
       {message && (
-        <div className="mb-4 text-xs text-emerald-400 bg-emerald-900/20 border border-emerald-800/50 rounded-lg px-3 py-2">
+        <div className="mb-4 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2">
           {message}
         </div>
       )}
 
-      <h3 className="text-sm font-semibold text-slate-300 mb-3">
+      <h3 className="text-sm font-semibold text-slate-700 mb-3">
         Log Absensi Hari Ini (Simulasi)
       </h3>
-      <div className="overflow-x-auto border border-slate-700 rounded-lg">
+      <div className="overflow-x-auto border border-slate-200 rounded-lg">
         <table className="min-w-full text-xs text-left">
-          <thead className="bg-slate-900/50">
+          <thead className="bg-slate-50">
             <tr>
-              <th className="px-4 py-3 font-medium text-slate-400">Waktu</th>
-              <th className="px-4 py-3 font-medium text-slate-400">Nama</th>
-              <th className="px-4 py-3 font-medium text-slate-400">Jabatan</th>
-              <th className="px-4 py-3 font-medium text-slate-400">Divisi</th>
-              <th className="px-4 py-3 font-medium text-slate-400">Status</th>
-              <th className="px-4 py-3 font-medium text-slate-400">Device</th>
+              <th className="px-4 py-3 font-medium text-slate-500">Waktu</th>
+              <th className="px-4 py-3 font-medium text-slate-500">Nama</th>
+              <th className="px-4 py-3 font-medium text-slate-500">Jabatan</th>
+              <th className="px-4 py-3 font-medium text-slate-500">Divisi</th>
+              <th className="px-4 py-3 font-medium text-slate-500">Status</th>
+              <th className="px-4 py-3 font-medium text-slate-500">Device</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-700">
+          <tbody className="divide-y divide-slate-200">
             {logs.length === 0 ? (
               <tr>
                 <td
@@ -98,15 +98,15 @@ const QrAttendanceModule = ({ user }: { user: any }) => {
               </tr>
             ) : (
               logs.map((log) => (
-                <tr key={log.id} className="hover:bg-slate-800/50">
-                  <td className="px-4 py-3 text-slate-300">
+                <tr key={log.id} className="hover:bg-slate-50">
+                  <td className="px-4 py-3 text-slate-700">
                     {log.date} · {log.time}
                   </td>
-                  <td className="px-4 py-3 text-slate-200 font-medium">{log.name}</td>
-                  <td className="px-4 py-3 text-slate-400">{log.jabatan}</td>
-                  <td className="px-4 py-3 text-slate-400 capitalize">{log.divisi}</td>
+                  <td className="px-4 py-3 text-slate-900 font-medium">{log.name}</td>
+                  <td className="px-4 py-3 text-slate-500">{log.jabatan}</td>
+                  <td className="px-4 py-3 text-slate-500 capitalize">{log.divisi}</td>
                   <td className="px-4 py-3">
-                    <span className="px-2 py-1 rounded-full bg-emerald-900/30 text-emerald-400 border border-emerald-800/50 text-[10px] font-medium">
+                    <span className="px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200 text-[10px] font-medium">
                       {log.status}
                     </span>
                   </td>
